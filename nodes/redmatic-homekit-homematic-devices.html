@@ -493,6 +493,7 @@
 
                             case 'hmip-ps':
                             case 'hmip-psm':
+                            case 'hmip-psm-2_qhj':
                                 addChannels(addr, 3, 3, {type: outletTypes});
                                 break;
 
@@ -645,7 +646,7 @@
                             if (d.enabledIfaces.includes(iface)) {
                                 Object.keys(d.metadata.devices[iface]).forEach(addr => {
                                     const dev = d.metadata.devices[iface][addr];
-                                    if (homematicValidDevices.includes((dev.TYPE && dev.TYPE.toLowerCase())) || (dev.PARENT_TYPE && homematicValidDevices.includes(dev.PARENT_TYPE.toLowerCase()))) {
+                                    if (homematicValidDevices.includes((dev.TYPE && dev.TYPE.toLowerCase().replace(/ /g, '_'))) || (dev.PARENT_TYPE && homematicValidDevices.includes(dev.PARENT_TYPE.toLowerCase()))) {
                                         devs.push({addr, type: dev.TYPE, name: d.channelNames[addr] || addr, channelCount: dev.CHILDREN && dev.CHILDREN.length});
                                     }
                                 });
